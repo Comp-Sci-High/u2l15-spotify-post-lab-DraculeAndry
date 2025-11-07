@@ -69,19 +69,19 @@ let addingSongsURL = "https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4
 //    - Ex: https://open.spotify.com/track/6a6JDEQbXdxkWFRIA0pRqL?si=e9e0c29125a746f6 => spotify:track:6a6JDEQbXdxkWFRIA0pRqL
 
 const songs = [
-  spotify:track:,
+  "spotify:track:4JX0GdKx8EduY2Ck7qac4H",
 ];
 
 // 3. The documentation describes how to create the request body. Using that information update the object below called `newSongsBody`
 // Add the array `songs` into this object
 
 const newSongsBody = {
-
+  songs: ['Teto Territory', 'PoPiPo', 'Tetoris']
 };
 
 // 4. Add `songData` as a parameter to the asynchronous function `addPlaylistSongs`.
 
-async function addPlaylistSongs() {
+async function addPlaylistSongs(songData) {
 
   // 5. Inside the function build out the options object.
   //    - Set the HTTP Method
@@ -89,11 +89,23 @@ async function addPlaylistSongs() {
   //    - Add the `newSongsBody` object into the body, make sure you stringify it
 
   const options = {
-    
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer BQCbCUQNADA28SeT0V2vvTf1Rc-ZHbaX_xk4BRifyQBzSfwYJMgj6o-M-85Qv3jZZDc8wqIpfgwPBykDWvJTGlH1OKbqY6sNWYRNFgUD2smcSqWMpVpp7FqXUrELoofkTWIqJwRpCiMB_apQnBOwURZK88Hg2RsKQExwQ8Lf4zImJnE1agLOiSFcEnGfVlQHGdiscjng059EDeQHWNsaJhkBQBRix5huQEIruMZyvhxjxB6IyWm4LSUcfJ0uUU-Vf3GDFNw0sQoALpoweGvXHvGP-SVUXWFhx-7DOt1Xd1xR',
+      "Content-Type": 'application/json'
+    },
+    body: JSON.stringify(promptData)
+  }
+  const response = await fetch(url)
+
+  const data = await response.json()
+  console.log(data)
+  return data
   };
 
   // 6. Use fetch() to send a POST request using the `addingSongsURL` and options object. Console log the response.
-}
+await fetch(addingSongsURL, options);
 
 // 7. Call your function `addPlaylistSongs` with `newSongsBody` passed as the parameter.
 // Refresh the page to your playlist, you should see your 3 new songs.
+addPlaylistSongs(songData)
